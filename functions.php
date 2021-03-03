@@ -1,40 +1,63 @@
 <?php
 
+// ==========================================================================
+// configuration du thème
+// ==========================================================================
+
+// affichage de la barre d'administration si les droits de l'utilisateur le permettent
 if ( ! current_user_can( 'manage_options' ) ) {
     show_admin_bar( false );
 } else {
     show_admin_bar( true );
 }
 
+// support de l'élément <title> par WordPress
+// https://www.usablewp.com/learn-wordpress/home-page/how-to-add-theme-support-for-the-title-tag/
 add_theme_support( 'title-tag' );
 
-add_theme_support(
-			'custom-logo',
-			array(
-				'height'      => 240,
-				'width'       => 240,
-				'flex-height' => true,
-                'header-text' => array( 'site-title', 'site-description' )
-			)
-		);
 
+// support d'un logo personnalisé depuis le gestionnaire de thème
+add_theme_support(
+    'custom-logo',
+    array(
+        'height'      => 240,
+        'width'       => 240,
+        'flex-height' => true,
+        'header-text' => array( 'site-title', 'site-description' )
+    )
+);
+
+
+// support des images mises en avant
 add_theme_support( 'post-thumbnails' );
 
+
+// support du résumé dans les posts de type article
+// https://www.wpbeginner.com/plugins/add-excerpts-to-your-pages-in-wordpress/
 add_post_type_support( 'article', 'excerpt' );
 
-add_theme_support(
-			'post-formats',
-			array(
-				'aside',
-				'image',
-				'video',
-				'quote',
-				'link',
-				'gallery',
-				'audio',
-			)
-		);
 
+// support des formats de posts (historiquement type de post de blog)
+// https://www.wpbeginner.com/wp-themes/what-whys-and-how-tos-of-post-formats-in-wordpress-3-1/
+add_theme_support(
+    'post-formats',
+    array(
+        'aside',
+        'image',
+        'video',
+        'quote',
+        'link',
+        'gallery',
+        'audio',
+    )
+);
+
+
+// ==========================================================================
+// fonctionnalités avancées du thème (hooks)
+// ==========================================================================
+
+// support du format SVG dans le centre de média
 function custom_mime_types($mimes) {
     $mimes['svg'] = 'image/svg+xml';
     return $mimes;
@@ -43,15 +66,19 @@ function custom_mime_types($mimes) {
 add_filter('upload_mimes', 'custom_mime_types');
 
 
-function startertheme_setup() {    
+// ajout d'une position de menu
+// https://codepen.io/cyrilvernier/post/wordpress-4-creer-un-nouveau-menu
+function startertheme_menu_setup() {    
     register_nav_menus(
         array( 'main-menu' => __( 'Main menu', 'startertheme' ) )
     );
 }
 
-add_action( 'after_setup_theme', 'startertheme_setup' );
+add_action( 'after_setup_theme', 'startertheme_menu_setup' );
 
 
+// chargement des feuilles de style personnalisées
+// https://www.wpbeginner.com/wp-tutorials/how-to-properly-add-javascripts-and-styles-in-wordpress/
 function startertheme_load_styles() {
     wp_register_style( 'startertheme-style', get_template_directory_uri() . '/css/main.css' );
     wp_enqueue_style( 'startertheme-style' );
@@ -60,6 +87,8 @@ function startertheme_load_styles() {
 add_action( 'wp_enqueue_scripts', 'startertheme_load_styles' );
 
 
+// chargement des scripts JavaScript personnalisés
+// https://www.wpbeginner.com/wp-tutorials/how-to-properly-add-javascripts-and-styles-in-wordpress/
 function startertheme_load_scripts() {
     wp_register_script( 'startertheme-jquery', 'https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js' );
     wp_register_script( 'startertheme-plugins', get_template_directory_uri() . '/js/plugins.js' );
@@ -73,6 +102,8 @@ function startertheme_load_scripts() {
 add_action( 'wp_enqueue_scripts', 'startertheme_load_scripts' );
 
 
+// ajout de positions de widget
+// https://codepen.io/cyrilvernier/post/wordpress-3-creer-une-nouvelle-zone-de-widgets
 function startertheme_widgets_init() {
     register_sidebar( array (
         'name' => __( 'Aside Widget Area', 'startertheme' ),
@@ -97,6 +128,8 @@ function startertheme_widgets_init() {
 add_action( 'widgets_init', 'startertheme_widgets_init' );
 
 
+// déplacement des scripts JavaScript dans le footer du thème
+// https://themesharbor.com/move-jquery-to-footer-in-wordpress/
 function move_jquery_into_footer( $wp_scripts ) {
 
     if( is_admin() ) {
@@ -111,6 +144,8 @@ function move_jquery_into_footer( $wp_scripts ) {
 add_action( 'wp_default_scripts', 'move_jquery_into_footer' );
 
 
+// suppression des emojis (scripts parasites dans la page rendue)
+// https://www.netmagik.com/how-to-disable-emojis-in-wordpress/
 function disable_wp_emojicons() {
 
   // all actions related to emojis

@@ -1,7 +1,7 @@
 @media print {
   *,
-  *:before,
-  *:after {
+*:before,
+*:after {
     background: transparent !important;
     color: #000 !important;
     /* Black prints faster */
@@ -10,7 +10,7 @@
     text-shadow: none !important;
   }
   a,
-  a:visited {
+a:visited {
     text-decoration: underline;
   }
   a[href]:after {
@@ -24,14 +24,14 @@
    * or use the `javascript:` pseudo protocol
    */
   a[href^="#"]:after,
-  a[href^="javascript:"]:after {
+a[href^="javascript:"]:after {
     content: "";
   }
   pre {
     white-space: pre-wrap !important;
   }
   pre,
-  blockquote {
+blockquote {
     border: 1px solid #999;
     page-break-inside: avoid;
   }
@@ -43,25 +43,25 @@
     display: table-header-group;
   }
   tr,
-  img {
+img {
     page-break-inside: avoid;
   }
   p,
-  h2,
-  h3 {
+h2,
+h3 {
     orphans: 3;
     widows: 3;
   }
   h2,
-  h3 {
+h3 {
     page-break-after: avoid;
   }
 }
 
 @media print {
   *,
-  *:before,
-  *:after {
+*:before,
+*:after {
     background: transparent !important;
     color: #000 !important;
     /* Black prints faster:
@@ -70,7 +70,7 @@
     text-shadow: none !important;
   }
   a,
-  a:visited {
+a:visited {
     text-decoration: underline;
   }
   a[href]:after {
@@ -84,14 +84,14 @@
      * or use the `javascript:` pseudo protocol
      */
   a[href^="#"]:after,
-  a[href^="javascript:"]:after {
+a[href^="javascript:"]:after {
     content: "";
   }
   pre {
     white-space: pre-wrap !important;
   }
   pre,
-  blockquote {
+blockquote {
     border: 1px solid #999;
     page-break-inside: avoid;
   }
@@ -103,17 +103,17 @@
     display: table-header-group;
   }
   tr,
-  img {
+img {
     page-break-inside: avoid;
   }
   p,
-  h2,
-  h3 {
+h2,
+h3 {
     orphans: 3;
     widows: 3;
   }
   h2,
-  h3 {
+h3 {
     page-break-after: avoid;
   }
 }
