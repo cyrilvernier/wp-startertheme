@@ -1,0 +1,87 @@
+// ==========================================================================
+// _base.scss
+// ==========================================================================
+
+// ====================================
+// elements
+// ====================================
+
+html {
+    color: #222;
+    font-size: 1em; /* 16px sur les navigateurs actuels */
+    height: 100%;
+    line-height: 1.375rem /* 1.375rem = 22px */;
+}
+
+::-moz-selection {
+    background: #b3d4fc;
+    text-shadow: none;
+}
+
+::selection {
+    background: #b3d4fc;
+    text-shadow: none;
+}
+
+body {
+    min-height: 100vh; /* la hauteur de body est forcée au minimum à celle du viewport, corrige les problèmes d'affichage de background si appliqué à body */
+    position: relative;
+    line-height: 1.65;
+    font-size: 1em;
+    
+    /**
+      * Gestion de l'optimisation des polices par le moteur de rendu
+      *  auto : laisse le moteur de rendu déterminer la meilleure méthode
+      *  optimizeLegibility : activation du crénage et des ligatures - affecte les performances d'affichage de la page et accentue l'effet FOUT, à n'utiliser que pour les textes courts < 1000 mots
+      *  optimizeSpeed : désactivation du crénage et des ligatures - accélère la vitesse de rendu de la page au détriment de la lisibilité
+      *  geometricPrecision : 
+      * https://developer.mozilla.org/fr/docs/Web/CSS/text-rendering
+      * https://css-tricks.com/almanac/properties/t/text-rendering/
+      */
+    
+    text-rendering: optimizeSpeed;
+    
+    /**
+      * Lissage des fonts (antialiasing) et hinting
+      * https://szafranek.net/blog/2009/02/22/font-smoothing-explained/
+      * https://developer.mozilla.org/fr/docs/Web/CSS/font-smooth
+      */
+    
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* adaptation automatique des images à leurs conteneurs */
+
+img {
+    height: auto;
+    width: 100%;
+}
+
+hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #ccc;
+    margin: 1em 0;
+    padding: 0;
+}
+
+audio,
+canvas,
+iframe,
+img,
+svg,
+video {
+    vertical-align: middle;
+}
+
+fieldset {
+    border: 0;
+    margin: 0;
+    padding: 0;
+}
+
+textarea {
+    resize: vertical;
+}
