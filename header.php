@@ -9,7 +9,7 @@
         <?php wp_head(); ?>
     </head>
     
-    <body>
+    <body <?php body_class(); ?>>
 
 <?php
 // Détection du header à afficher selon la page chargée
