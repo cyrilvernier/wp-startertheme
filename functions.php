@@ -163,4 +163,21 @@ function disable_wp_emojicons() {
 
 add_action( 'init', 'disable_wp_emojicons' );
 
+
+// ==========================================================================
+// fonctions personnalisées
+// ==========================================================================
+
+// récupération de l'ID d'une page / post à partir de son slug
+// p.ex. pour créer un lien avec get_permalink( $id )
+function get_page_ID_by_slug( $slug ) {
+    $page = get_page_by_path( $slug );
+    if ( $page ) {
+        return (int) $page->ID;
+    }
+    else {
+        return null;
+    }
+}
+
 ?>
